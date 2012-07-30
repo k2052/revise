@@ -1,0 +1,27 @@
+doctype 5
+html lang="en" 
+  head
+    meta charset="UTF-8"
+    title Demo App
+    == stylesheet_link_tag :application
+  body
+    .navbar
+      .navbar-inner
+        .container  
+          a.brand href==url(:main, :index) Demo App
+          ul.nav
+            - if current_account
+              li 
+                a href==url(:accounts, :edit) Edit Profile
+              li 
+                a href==url(:sessions, :destroy) Sign Out
+            - else
+              li
+                a href==url(:sessions, :new) Sign In
+              li 
+                a href==url(:accounts, :new) Register
+    .main.container
+      .row
+        .span6.columns
+          .messages== flash_messages
+      == yield

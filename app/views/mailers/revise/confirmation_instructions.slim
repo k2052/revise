@@ -1,0 +1,7 @@
+p 
+  | Welcome 
+  == email 
+p You can confirm your account email through the link below:
+
+p
+  a href=="https://#{ENV['DOMAIN']}#{ReviseDemoApp.url(:accounts, :confirm, :confirmation_token => confirmation_token)}" Confirm my account

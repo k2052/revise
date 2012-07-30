@@ -1,0 +1,23 @@
+.page-header
+  h1 Sign In
+
+.row
+  .span6.columns
+    ==form_tag(url(:sessions, :create), :class => 'form-stacked') do
+      fieldset
+        - if flash[:alert]
+          .alert-message.block-message.error
+            p== flash[:alert]
+    
+        .clearfix
+          == label_tag :email
+          .input
+            == text_field_tag :email, :value => params[:email], :class => 'field'
+
+        .clearfix
+          == label_tag :password
+          .input
+            == password_field_tag :password, :value => params[:password], :class => 'field'
+
+        .actions
+          == submit_tag "Sign In", :class => "btn primary"

@@ -1,0 +1,18 @@
+.row
+  .span6.columns
+    fieldset
+      == form_for @account, url(:accounts, :send_reset_password_instructions), {:class => 'form-stacked', :method => "post"} do |f|
+        - if @account.errors.any?
+          .alert-message.block-message.error
+            p There was a problem. Perhaps this email does not exist?
+            .errors
+              - @account.errors.full_messages.each do |msg|
+                p== msg
+
+        .clearfix
+          == f.label :email
+          .input
+            == f.text_field :email, :class => "field"
+
+        .actions 
+          == f.submit('Submit', :class => "btn primary", :id => :forgot_pass_submit)   

@@ -1,0 +1,8 @@
+en: 
+  revise:
+    recoverable:
+      reset_password_instructions:
+        subject: "Reset Password Instructions For %{domain}"
+    confirmable:
+      confirmation_instructions:
+        subject: "Confirm Your Email At %{domain}"

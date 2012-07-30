@@ -1,0 +1,8 @@
+---
+:orm: mongomapper
+:test: minitest
+:mock: none
+:script: jquery
+:renderer: slim
+:stylesheet: compass
+:admin_renderer: slim

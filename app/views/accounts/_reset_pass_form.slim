@@ -1,0 +1,23 @@
+.row
+  .span6.columns
+    fieldset
+      == form_for @account, url(:accounts, :new_password, :reset_password_token => params[:reset_password_token]), {:class => 'form-stacked', :method => "put"} do |f|
+        - if @account.errors.any?
+          .alert-message.block-message.error
+            p There was a problem. Perhaps this email does not exist?
+            .errors
+              - @account.errors.full_messages.each do |msg|
+                p== msg
+
+        .clearfix
+          == label_tag :password
+          .input
+            == password_field_tag :password, :value => params[:password], :class => 'field'
+
+        .clearfix
+          == label_tag :password_confirmation
+          .input
+            == password_field_tag :password_confirmation, :value => params[:password_confirmation], :class => 'field'
+
+        .actions 
+          == f.submit('Submit', :class => "btn primary", :id => :reset_pass_submit)   
