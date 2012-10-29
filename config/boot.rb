@@ -25,7 +25,7 @@ Padrino.after_load do
 
   Revise.setup do |config|
     config.pepper                = 'cats'
-    config.mailer_from           = ENV['REVISE_FROM_EMAIL']
+    config.mailer_from           = 'test_email@localhost'
     config.case_insensitive_keys = [:email]
     config.strip_whitespace_keys = [:email]
     config.reconfirmable         = true

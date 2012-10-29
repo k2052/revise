@@ -38,6 +38,8 @@ GEM
       compass
     daemons (1.1.8)
     eventmachine (0.12.10)
+    factory_girl (4.1.0)
+      activesupport (>= 3.0.0)
     ffaker (1.15.0)
     fssm (0.2.9)
     http_router (0.10.2)
@@ -48,10 +50,13 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    metaclass (0.0.1)
     mime-types (1.19)
     mini_shoulda (0.4.0)
       minitest (> 2.1.0)
     minitest (2.6.2)
+    mocha (0.11.1)
+      metaclass (~> 0.0.1)
     mongo (1.6.4)
       bson (~> 1.6.4)
     mongo_mapper (0.11.2)
@@ -131,9 +136,11 @@ DEPENDENCIES
   bson_ext
   compass
   compass_twitter_bootstrap
+  factory_girl
   ffaker
   mini_shoulda
   minitest (~> 2.6.0)
+  mocha
   mongo_mapper
   orm_adapter
   padrino

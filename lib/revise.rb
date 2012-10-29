@@ -23,6 +23,7 @@ module Revise
     autoload :Main,          'revise/controllers/main'
     autoload :Recovery,      'revise/controllers/recovery'
     autoload :Sessions,      'revise/controllers/sessions'
+    autoload :Invitations,   'revise/controllers/invitations'
   end
 
   module Helpers
@@ -39,6 +40,7 @@ module Revise
     autoload :Confirmable,             'revise/models/confirmable'
     autoload :DatabaseAuthenticatable, 'revise/models/database_authenticatable'
     autoload :Recoverable,             'revise/models/recoverable'
+    autoload :Invitable,               'revise/models/invitable'
   end
 
   mattr_accessor :app
@@ -74,6 +76,27 @@ module Revise
 
   mattr_accessor :strip_whitespace_keys
   @@strip_whitespace_keys = []
+
+  mattr_accessor :invite_for
+  @@invite_for = 0
+
+  mattr_accessor :validate_on_invite
+  @@validate_on_invite = false
+
+  mattr_accessor :invitation_limit
+  @@invitation_limit = 5
+
+  mattr_accessor :email_regexp
+  @@email_regexp = /\A[^@]+@[^@]+\z/
+
+  mattr_accessor :invite_key
+  @@invite_key = {:email => @@email_regexp}
+
+  mattr_accessor :resend_invitation
+  @@resend_invitation = true
+
+  mattr_accessor :invited_by_class_name
+  @@invited_by_class_name = nil
 
   def self.setup
     yield self

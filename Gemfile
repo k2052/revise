@@ -23,9 +23,17 @@ gem 'padrino-flash', :require => 'padrino-flash'
 # Test requirements
 group :test do
   gem 'mini_shoulda',        :require => 'mini_shoulda'
-  gem 'minitest', "~>2.6.0", :require => "minitest/autorun"
-  gem 'rack-test',           :require => "rack/test"
+  gem 'minitest', "~>2.6.0", :require => 'minitest/autorun'
+  gem 'rack-test',           :require => 'rack/test'
   gem 'ffaker',              :require => 'ffaker'
+  gem 'factory_girl',        :require => 'factory_girl'
+  gem 'mocha',               :require => false
+end
+
+# Development requirements
+group :development do 
+  gem 'ffaker'
+  gem 'factory_girl'
 end
 
 # Padrino 

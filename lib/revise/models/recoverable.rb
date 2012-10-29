@@ -32,22 +32,22 @@ module Revise
         reset_password_sent_at && reset_password_sent_at.utc >= self.class.reset_password_within.ago
       end
 
+      # Generates a new random token for reset password
+      def generate_reset_password_token
+        self.reset_password_token   = self.class.reset_password_token
+        self.reset_password_sent_at = Time.now.utc
+        self.reset_password_token
+      end
+
+      # Resets the reset password token with and save the record without
+      # validating
+      def generate_reset_password_token!
+        generate_reset_password_token && save(:validate => false)
+      end
+
       protected
         def should_generate_reset_token?
           reset_password_token.nil? || !reset_password_period_valid?
-        end
-
-        # Generates a new random token for reset password
-        def generate_reset_password_token
-          self.reset_password_token   = self.class.reset_password_token
-          self.reset_password_sent_at = Time.now.utc
-          self.reset_password_token
-        end
-
-        # Resets the reset password token with and save the record without
-        # validating
-        def generate_reset_password_token!
-          generate_reset_password_token && save(:validate => false)
         end
 
         # Removes reset_password token

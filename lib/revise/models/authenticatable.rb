@@ -7,7 +7,7 @@ module Revise
       HELPERS     = ['Authentication']
       CONTROLLERS = ['Main', 'Sessions', 'Accounts']
 
-      BLACKLIST_FOR_SERIALIZATION = [:encrypted_password, :reset_password_token, :reset_password_sent_at,
+      BLACKLIST_FOR_SERIALIZATION = [:encrypted_password, :reset_password_token, :reset_password_sent_at, :role,
         :remember_created_at, :sign_in_count, :current_sign_in_at, :last_sign_in_at, :current_sign_in_ip,
         :last_sign_in_ip, :password_salt, :confirmation_token, :confirmed_at, :confirmation_sent_at,
         :remember_token, :unconfirmed_email, :failed_attempts, :unlock_token, :locked_at, :authentication_token, :role, 
@@ -16,10 +16,11 @@ module Revise
       included do
         before_validation :downcase_keys
         before_validation :strip_whitespace
+        attr_accessor :skip_email
       end
 
       def self.required_fields(klass)
-        []
+        [:role]
       end
 
       def valid_for_authentication?
@@ -38,7 +39,13 @@ module Revise
         :inactive
       end
 
-      def authenticatable_salt
+      def password_required?
+        encrypted_password.blank? || password.present?
+      end
+
+      def role?(role)
+        return false unless self.respond_to?(:role)
+        return self.role.to_sym == role.to_sym
       end
 
       array = %w(serializable_hash)
@@ -63,7 +70,8 @@ module Revise
       protected
 
       def send_revise_notification(resource, notification, *attributes)
-        Revise.app.deliver(resource, notification, *attributes)
+        return false if self.email.blank?
+        Revise.app.deliver(resource, notification, *attributes) unless @skip_email
       end
 
       def downcase_keys

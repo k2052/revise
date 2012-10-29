@@ -1,15 +1,27 @@
 require 'ffaker' 
+require 'factory_girl'
 
+FactoryGirl.definition_file_paths = [
+  File.join(Padrino.root, 'test', 'factories')
+]
+FactoryGirl.find_definitions
+
+# Add an admin account if there isn't one
 admin_account = Account.first(:role => "admin")
-
 unless admin_account
-  email     = shell.ask "Which email do you want use for logging into admin?"
-  password  = shell.ask "Tell me the password to use:"
+  email      = shell.ask "Which email do you want use for logging into admin?"
+  password   = shell.ask "Tell me the password to use:"
+  first_name = shell.ask "What is your first name?"
+  last_name  = shell.ask "What is your last name?"
 
   shell.say ""
 
-  account = Account.create(:email => email, :name => "Foo", :surname => "Bar", :password => password, 
-    :password_confirmation => password, :role => "admin")
+  account = Account.create(:email                 => email,
+                           :first_name            => first_name,
+                           :last_name             => last_name, 
+                           :password              => password,
+                           :password_confirmation => password,
+                           :role                  => 'admin')
 
   if account.valid?
     shell.say "================================================================="
@@ -19,34 +31,9 @@ unless admin_account
     shell.say "   password: #{password}"
     shell.say "================================================================="
   else
-    shell.say "Sorry but some thing went wrong!"
-    shell.say ""
+    shell.say "Sorry but something went wrong!"
     account.errors.full_messages.each { |m| shell.say "   - #{m}" }
   end
 
   shell.say ""
-end
-
-## 
-# Accounts
-#
-unless Padrino.env == :production
-  shell.say "Adding 5 unconfirmed Accounts"
-  5.times do |i| 
-    account = Account.new(:email => Faker::Internet.email, :username => Faker::Internet.user_name, 
-                          :name => Faker::Name.name, :password => 'testpass', 
-                          :password_confirmation => 'testpass')    
-    account.save 
-  end
-
-  shell.say "Adding 5 confirmed Accounts"
-  5.times do |i| 
-    account = Account.new(:email => Faker::Internet.email, :username => Faker::Internet.user_name, 
-                          :name => Faker::Name.name, :password => 'testpass', 
-                          :password_confirmation => 'testpass')    
-    account.save 
-
-    account = Account.confirm_by_token(account.confirmation_token)
-    account.save
-  end
 end

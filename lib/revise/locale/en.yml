@@ -6,3 +6,6 @@ en:
     confirmable:
       confirmation_instructions:
         subject: "Confirm Your Email At %{domain}"
+    invitable:
+      invation_instructions:
+        subject: "You've Been Invited To %{domain}"

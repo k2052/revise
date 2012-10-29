@@ -20,9 +20,12 @@ module Revise
             end 
 
             @account = Account.new(params[:account])   
-            @account.save  
-
-            respond(@account, url(:main, :index))
+            if @account.save  
+              redirect url(:main, :index)
+            else
+              status 400
+              render 'accounts/new'
+            end
           end
 
           get :edit, :map => '/accounts/edit', :priority => :low do

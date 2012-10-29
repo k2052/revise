@@ -1,0 +1,11 @@
+- @account = Account.new if @account.nil?
+== form_for @account, url(:invitations, :update), :method => :put do |f|
+  == f.hidden_field :invitation_token, :value => params[:invitation_token]
+
+  == f.label :password
+  == f.password_field :password
+
+  == f.label :password_confirmation
+  == f.password_field :password_confirmation
+
+  == f.submit 'Update'

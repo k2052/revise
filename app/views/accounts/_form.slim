@@ -4,7 +4,7 @@
       == form_for @account, (defined?(editing) ? url(:accounts, :update) : url(:accounts, :new)), {:class => 'form-stacked', :method => (defined?(editing) ? "put" : "post")} do |f|
         - if @account.errors.any?
           .alert-message.block-message.error
-            p #{pluralize(account.errors.count, "problem")} with your registration:
+            p #{pluralize(@account.errors.count, "problem")} with your registration:
             .errors
               - @account.errors.full_messages.each do |msg|
                 p== msg
