@@ -16,6 +16,7 @@ module Revise
 
   autoload :Models,      'revise/models'
   autoload :ParamFilter, 'revise/param_filter'
+  autoload :Inviter,     'revise/inviter'
 
   module Controllers
     autoload :Accounts,      'revise/controllers/accounts'
