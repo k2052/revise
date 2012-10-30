@@ -3,13 +3,13 @@
  
    Gem::Specification.new do |s|
     s.name        = "revise"
-    s.version     = '0.1'
+    s.version     = '0.0.1'
     s.platform    = Gem::Platform::RUBY
     s.authors     = ["Ken Erickson"]
     s.email       = "bookworm.productions@gmail.com"
     s.homepage    = "http://github.com/bookworm/revise"
-    s.summary     = "Authentication for Padrino"
-    s.description = "Authentication for Padrino"
+    s.summary     = "Authentication, Registrations, Confirmations, Invitations etc for Padrino"
+    s.description = "Authentication, Registrations, Confirmations, Invitations etc  for Padrino"
 
     s.files         = `git ls-files -- lib/*`.split("\n")
     s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
