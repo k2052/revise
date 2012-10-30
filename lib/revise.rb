@@ -34,6 +34,7 @@ module Revise
   module Mailers
     autoload :Confirmable, 'revise/mailers/confirmable'
     autoload :Recoverable, 'revise/mailers/recoverable'
+    autoload :Invitable,   'revise/mailers/invitable'
   end
 
   module Models
