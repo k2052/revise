@@ -7,5 +7,5 @@ en:
       confirmation_instructions:
         subject: "Confirm Your Email At %{domain}"
     invitable:
-      invation_instructions:
+      invitation_instructions:
         subject: "You've Been Invited To %{domain}"

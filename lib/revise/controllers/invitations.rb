@@ -7,7 +7,7 @@ module Revise
             halt 403, 'Login first' unless current_account
           end
 
-          before(:create) do
+          before(:new, :create) do
             halt 403, "You've no invitations left" unless current_account.has_invitations_left? || current_account.role?(:admin)
           end
 

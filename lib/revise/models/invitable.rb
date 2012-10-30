@@ -43,15 +43,17 @@
 
       # Accept an invitation by clearing invitation token and and setting invitation_accepted_at
       # Confirms it if model is confirmable
-      def accept_invitation!
+      def accept_invitation
         self.invitation_accepted_at = Time.now.utc
         if self.invited_to_sign_up? && self.valid?
-          run_callbacks :invitation_accepted do
-            self.invitation_token = nil
-            self.confirmed_at = self.invitation_accepted_at if self.respond_to?(:confirmed_at)
-            self.save(:validate => false)
-          end
+          self.invitation_token = nil
+          self.confirmed_at = self.invitation_accepted_at if self.respond_to?(:confirmed_at)
         end
+      end
+
+      def accept_invitation!
+        self.accept_invitation
+        self.save()
       end
 
       # Verifies whether a user has been invited or not
