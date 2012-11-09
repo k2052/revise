@@ -45,7 +45,7 @@
       # Confirms it if model is confirmable
       def accept_invitation
         self.invitation_accepted_at = Time.now.utc
-        if self.invited_to_sign_up? && self.valid?
+        if self.invited_to_sign_up? && self.valid? && self.errors.empty?
           self.invitation_token = nil
           self.confirmed_at = self.invitation_accepted_at if self.respond_to?(:confirmed_at)
           return true
@@ -61,7 +61,7 @@
 
       # Verifies whether a user has been invited or not
       def invited_to_sign_up?
-        invitation_token
+        !invitation_token.to_s.blank?
       end
 
       # Verifies whether a user accepted an invitation (or is accepting it)
