@@ -48,12 +48,15 @@
         if self.invited_to_sign_up? && self.valid?
           self.invitation_token = nil
           self.confirmed_at = self.invitation_accepted_at if self.respond_to?(:confirmed_at)
+          return true
+        else
+          return false
         end
       end
 
       def accept_invitation!
-        self.accept_invitation
-        self.save()
+        return false unless self.accept_invitation
+        self.save
       end
 
       # Verifies whether a user has been invited or not
