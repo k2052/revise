@@ -2,6 +2,7 @@ module Revise
   module Helpers
     module Authentication
       def authenticate()
+        params[:email] = params[:email].downcase rescue nil
         if account = Account.authenticate(params[:email], params[:password])
           set_current_account(account)
           redirect url(:main, :index)
