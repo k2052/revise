@@ -19,6 +19,6 @@
     s.add_dependency 'padrino-responders'
     s.add_dependency 'padrino-fields'
     s.add_dependency 'padrino-flash'
-    s.add_dependency 'activesupport', '~> 3.0.0'
+    s.add_dependency 'activesupport'
     s.add_dependency 'orm_adapter'
    end
