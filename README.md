@@ -126,3 +126,9 @@ Invitation bits ported from [devise_invitable](https://github.com/scambra/devise
 # License 
 
 MIT License. 
+
+## Support
+
+If you found this repo useful please consider supporting me on [Gittip](https://www.gittip.com/k2052) or sending me some
+bitcoin `1csGsaDCFLRPPqugYjX93PEzaStuqXVMu`
+
